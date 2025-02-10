@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LivrariaAPI.Models;
-using LivrariaAPI.Data;
+using LivrariaAPI.DTOs;
 
 namespace LivrariaAPI.Controllers
 {
@@ -8,35 +8,47 @@ namespace LivrariaAPI.Controllers
     [ApiController]
     public class LivrosController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private static List<LivroFisico> _livrosFisicos = new();
+        private static List<LivroDigital> _livrosDigitais = new();
 
-        public LivrosController(AppDbContext context)
+        // POST: api/livros/fisico
+        [HttpPost("fisico")]
+        public IActionResult CriarLivroFisico([FromBody] LivroFisicoDTO livroDto)
         {
-            _context = context;
-        }
+            if (livroDto == null)
+                return BadRequest("Livro inválido.");
 
-        // POST: api/livros
-        [HttpPost]
-        public async Task<ActionResult<Livro>> PostLivro(Livro livro)
-        {
-            _context.Livros.Add(livro);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetLivro), new { id = livro.Id }, livro);
-        }
-
-        // GET: api/livros/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Livro>> GetLivro(int id)
-        {
-            var livro = await _context.Livros.FindAsync(id);
-
-            if (livro == null)
+            var livro = new LivroFisico
             {
-                return NotFound();
-            }
+                Titulo = livroDto.Titulo,
+                Autor = livroDto.Autor,
+                ISBN = livroDto.ISBN,
+                Peso = livroDto.Peso,
+                TipoCapa = livroDto.TipoCapa
+            };
 
-            return livro;
+            _livrosFisicos.Add(livro);
+            return Ok(new { message = "Livro físico cadastrado com sucesso!", livro });
+        }
+
+        // POST: api/livros/digital
+        [HttpPost("digital")]
+        public IActionResult CriarLivroDigital([FromBody] LivroDigitalDTO livroDto)
+        {
+            if (livroDto == null)
+                return BadRequest("Livro inválido.");
+
+            var livro = new LivroDigital
+            {
+                Titulo = livroDto.Titulo,
+                Autor = livroDto.Autor,
+                ISBN = livroDto.ISBN,
+                TamanhoArquivoMB = livroDto.TamanhoArquivoMB,
+                Formato = livroDto.Formato
+            };
+
+            _livrosDigitais.Add(livro);
+            return Ok(new { message = "Livro digital cadastrado com sucesso!", livro });
         }
     }
 }

@@ -1,7 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using LivrariaAPI.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Adiciona suporte a controladores
+builder.Services.AddControllers();
 
 // Configuração do banco de dados SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -12,11 +20,15 @@ var app = builder.Build();
 // Configuração do pipeline de requisições HTTP
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapOpenApi(); // Configura o OpenAPI (Swagger) para desenvolvimento
 }
 
 app.UseHttpsRedirection();
 
+// Mapeia os controladores
+app.MapControllers();
+
+// Endpoint de exemplo (opcional, pode ser removido)
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -38,6 +50,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.Run();
 
+// Record para o endpoint de exemplo (opcional, pode ser removido)
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);

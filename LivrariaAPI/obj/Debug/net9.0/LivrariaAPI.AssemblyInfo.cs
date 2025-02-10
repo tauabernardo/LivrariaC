@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LivrariaAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77b47ff1dd915d8fdc1aeee5baa776d43b75346c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d49b8c71725164eead4cad4330511b2b14c5df9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("LivrariaAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LivrariaAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
