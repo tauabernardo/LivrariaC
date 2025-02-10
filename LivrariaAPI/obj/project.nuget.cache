@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "MyG2lbHBgnY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\taua_\\Desktop\\Projects\\LivrariaAPI\\LivrariaAPI\\LivrariaAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\taua_\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.1\\microsoft.aspnetcore.openapi.9.0.1.nupkg.sha512",
+    "C:\\Users\\taua_\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
